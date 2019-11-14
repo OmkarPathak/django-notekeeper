@@ -87,22 +87,22 @@ def delete_note(request, pk):
 def search_note(request):
     if request.is_ajax():
         q = request.GET.get('term')
-        books = Book.objects.filter(
-                book_name__icontains=q,
-                added_by_user=request.user
+        notes = Note.objects.filter(
+                note_title__icontains=q,
+                user=request.user
             )[:10]
         results = []
-        for book in books:
-            book_json = {}
-            book_json['slug'] = book.slug
-            book_json['label'] = book.book_name
-            book_json['value'] = book.book_name
-            results.append(book_json)
+        for note in notes:
+            note_json = {}
+            note_json['slug'] = note.slug
+            note_json['label'] = note.note_title
+            note_json['value'] = note.note_title
+            results.append(note_json)
         data = json.dumps(results)
     else:
-        book_json = {}
-        book_json['slug'] = None
-        book_json['label'] = None
-        book_json['value'] = None
-        data = json.dumps(book_json)
+        note_json = {}
+        note_json['slug'] = None
+        note_json['label'] = None
+        note_json['value'] = None
+        data = json.dumps(note_json)
     return HttpResponse(data)

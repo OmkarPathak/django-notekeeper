@@ -102,12 +102,12 @@
           $('.row-offcanvas').toggleClass('active');
         });
 
-        $("#search_book").autocomplete({
-          source: "% url 'search_book' %}",
+        $("#search_note").autocomplete({
+          source: "{% url 'search_note' %}",
           minLength: 2,
           select: function (value, data) {
             // console.log();
-            window.location.replace("/books/" + data['item']['slug'] + "/");
+            window.location.replace("/notes/" + data['item']['slug'] + "/");
           }
         });
       });
