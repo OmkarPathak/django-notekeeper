@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{{ note_detail.note_title }}{% endblock %}
+{% block content %}
+<div class="container">{% include 'messages.html' %}</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            {% if note_detail %}
+                <h1>
+                    {{ note_detail.book_name }}
+                    <span class="float-right">
+                        <a class="open-modal" data-url="{% url 'note_details_edit' note_detail.id %}" style="text-decoration: none; color: white">    
+                            <span class="btn btn-primary"><i class="far fa-edit"> </i></span>
+                        </a>
+                        <span class="btn btn-danger" data-toggle="modal" data-target="#delete_note_confirmation">
+                            <i class="far fa-trash-alt"> </i>
+                        </span>
+                    </span>
+                </h1>
+                <h3 class="row">
+                    <p class="col-lg-6 col-md-6 col-sm-12">{{ note_detail.note_title }}</p>
+                    <p class="col-lg-6 col-md-6 col-sm-12" style="color: black; font-size: 15px;"><span class="float-right">Created at: {{ note_detail.created_at }} <br> Updated at: {{ note_detail.updated_at }}</span></p>
+                </h3>
+                <hr>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- The result get appended here -->
+<div class="modal-div"></div>
+
+<!-- Delete Note Modal -->
+<div class="modal fade" id="delete_note_confirmation">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm Deletion</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row container">
+                    <h5>Are you sure you want to delete "{{ note_detail.note_title }}"?</h5>
+                </div>
+            </div>
+    
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Cancel">
+                <button type="button" class="btn btn-danger"><a href="{% url 'delete_single_note' note_detail.id %}" style="text-decoration: none; color: white">Delete</a></button>
+            </div>
+    
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    var modalDiv = $(".modal-div");
+    $(".open-modal").on("click", function() {
+    $.ajax({
+        type: 'GET',
+        url: $(this).attr("data-url"),
+        success: function(data) {
+            modalDiv.html(data);
+            $("#edit_note").modal();
+        }
+    });
+    });
+</script>
+{% endblock %}

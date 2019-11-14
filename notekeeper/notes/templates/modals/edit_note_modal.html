@@ -1,0 +1,31 @@
+{% load crispy_forms_tags %}
+<div id="edit_note" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit "{{ form.instance.note_title }}"</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{% url 'note_details_edit' form.instance.id %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form-group col-lg-12 col-md-12">
+                        {{ field | as_crispy_field }}
+                    </div>
+                    {% endfor %}     
+                </div>
+                <div class="modal-footer">
+                        <input class="btn btn-primary" type="submit" value="Save Changes"/>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+$('#id_tags').tagsinput('refresh');
+</script>

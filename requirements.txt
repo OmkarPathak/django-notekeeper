@@ -1,0 +1,6 @@
+Django==2.2.7
+django-crispy-forms==1.8.0
+django-taggit==1.1.0
+python-decouple==3.2
+pytz==2019.3
+sqlparse==0.3.0

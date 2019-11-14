@@ -1,0 +1,127 @@
+<!doctype html>
+{% load static %}
+{% load active %}
+{% load crispy_forms_tags %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'css/b4_sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tagsinput.css' %}">
+    <!-- <link rel="shortcut icon" href="{% static 'images/logomarkv2.ico' %}"> -->
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body style="font-family: 'Poppins', sans-serif;">
+    {% include 'navbar.html' %}
+    <div class="row-offcanvas row-offcanvas-left">
+        <div id="sidebar" class="sidebar-offcanvas">
+            <div class="col-lg-12 col-md-12" style="padding: 0; margin-top: 4%">
+              <div style="margin-left: 6%; margin-right: 6%;">
+                <h3>Notes <a id="a_d" class="btn float-right" style="font-size: 25px; color: blue; padding-top: 0;"  data-toggle="modal" data-target="#add_note"><i class="fas fa-plus" data-toggle="tooltip" title="Add a new note"></i></a></h3>
+                <input type="text" id="search_note" class="form-control" placeholder="Search">
+              </div>
+              <hr>
+              <ul class="nav nav-pills flex-column">
+                {% for note in notes %}
+                <li class="nav-item" id="note_details">
+                  <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.updated_at|date:"d M Y" }} :</span> {{ note.note_title }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+        <div id="main">
+            <div style="margin-top: 2%; margin-left: 10px;" class="row">
+                <p class="float-left d-block d-sm-block d-md-none" style="margin-left: 2%;">
+                  <button type="button" class="btn btn-primary btn-xs" id="offcanvas" data-toggle="offcanvas">Show/Add Books</button>
+                </p>
+            </div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div><!--/row-offcanvas -->
+
+    <!-- The Modal -->
+    <div class="modal fade" id="add_note">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Add New Note</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <form action="{% url 'notes' %}" method="post">
+          {% csrf_token %}
+          <div class="modal-body">
+            <div class="row">
+              {% for field in add_note_form %}
+              <div class="form-group col-lg-12 col-md-12">
+                  {{ field | as_crispy_field }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-success" value="Add">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+    <script src="{% static 'js/b4_sidebar.js' %}"></script>
+    <script src="{% static 'js/tagsinput.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
+    <script>
+      $(document).ready(function() {
+        $('#offcanvas').click(function() {
+          $('.row-offcanvas').toggleClass('active');
+        });
+
+        $('#a_d').click(function() {
+          $('.row-offcanvas').toggleClass('active');
+        });
+
+        $("#search_book").autocomplete({
+          source: "% url 'search_book' %}",
+          minLength: 2,
+          select: function (value, data) {
+            // console.log();
+            window.location.replace("/books/" + data['item']['slug'] + "/");
+          }
+        });
+      });
+    </script>
+    {% if form_error %}
+      <script>
+        $('#add_note').modal("show");
+      </script>
+    {% endif %}
+
+    <script>
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip(); 
+      });
+    </script>
+  </body>
+</html>
