@@ -3,6 +3,7 @@ from django import forms
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 def generate_unique_slug(_class, field):
     """
@@ -52,5 +53,6 @@ class AddNoteForm(forms.ModelForm):
                 attrs={
                     'data-role':'tagsinput',
                 }
-            )
+            ),
+            'note_content': SummernoteWidget(),
         }

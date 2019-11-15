@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'taggit',
     'accounts',
     'notes',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,10 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Bootstrap Crispy-Forms config
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+SUMMERNOTE_THEME = 'bs4'
+
+TIME_ZONE =  'Asia/Kolkata'

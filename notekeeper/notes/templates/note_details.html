@@ -23,6 +23,11 @@
                     <p class="col-lg-6 col-md-6 col-sm-12" style="color: black; font-size: 15px;"><span class="float-right">Created at: {{ note_detail.created_at }} <br> Updated at: {{ note_detail.updated_at }}</span></p>
                 </h3>
                 <hr>
+                <div class="row">
+                    <div class="col-12">
+                        {{ note_detail.note_content|safe }}
+                    </div>
+                </div>
             {% endif %}
         </div>
     </div>
