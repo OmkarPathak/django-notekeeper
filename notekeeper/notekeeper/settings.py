@@ -137,3 +137,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 SUMMERNOTE_THEME = 'bs4'
 
 TIME_ZONE =  'Asia/Kolkata'
+
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'fontNames': ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact', 'Tahoma', 'Times New Roman', 'Verdana', 'Roboto', 'Poppins'],
+        # Change editor size
+        'width': '100%',
+        'height': '300%',
+    },
+    'lazy': True,
+}

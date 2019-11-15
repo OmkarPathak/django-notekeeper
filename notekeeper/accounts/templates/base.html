@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
     <link rel="stylesheet" href="{% static 'css/b4_sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'css/tagsinput.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
     <!-- <link rel="shortcut icon" href="{% static 'images/logomarkv2.ico' %}"> -->
     <title>{% block title %}{% endblock %}</title>
   </head>
@@ -38,10 +41,8 @@
             </div>
         </div>
         <div id="main">
-            <div style="margin-top: 2%; margin-left: 10px;" class="row">
-                <p class="float-left d-block d-sm-block d-md-none" style="margin-left: 2%;">
-                  <button type="button" class="btn btn-primary btn-xs" id="offcanvas" data-toggle="offcanvas">Show/Add Books</button>
-                </p>
+            <div style="margin-top: 2%;" class="row">
+                <button type="button" class="btn btn-primary btn-block d-block d-sm-block d-md-none" id="offcanvas" data-toggle="offcanvas" style=" border-radius: 0; margin-left: 5%; margin-right: 5%;">Show/Add Notes</button>
             </div>
             {% block content %}
             {% endblock %}
@@ -64,6 +65,7 @@
           {% csrf_token %}
           <div class="modal-body">
             <div class="row">
+              {{ add_note_form.media }}
               {% for field in add_note_form %}
               <div class="form-group col-lg-12 col-md-12">
                   {{ field | as_crispy_field }}
@@ -84,7 +86,6 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" type="text/javascript"></script>
@@ -94,6 +95,8 @@
     {% endblock %}
     <script>
       $(document).ready(function() {
+        initSummernote();
+
         $('#offcanvas').click(function() {
           $('.row-offcanvas').toggleClass('active');
         });

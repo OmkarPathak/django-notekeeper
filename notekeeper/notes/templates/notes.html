@@ -11,39 +11,54 @@
         {% if total_notes == 0 %}
         <div class="col-lg-12 col-md-12 col-sm-12" style="font-size: 20px;">
             <p>
-                Hi, welcome to Django Bookworm where you can store all your favorite books and
-                what all you have learned from them. A simple and fun way to get the summary of 
-                your learning which is easily accessible through the beautiful GUI.
+                Hi, welcome to Django Notekeeper where you can store all your notes!
             </p>
 
             <p>
-                You can add a new book to get started from left side menu by clicking on the <i class="fas fa-plus" style="font-size: 15px;"></i> sign.
+                You can add a new note to get started from left side menu by clicking on the <i class="fas fa-plus" style="font-size: 15px;"></i> sign.
             </p>
         </div>
         {% else %}
-        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-            <div class="card">
-                <h1 class="count" style="color:red; padding-top: 2%;">
-                    {{ total_notes }}
-                </h1>
-                <p style="font-size: 20px; color: blue">
-                    Total Books<br>Read
-                </p>
-            </div>
-        </div>
 
-        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-            <div class="card">
-                <h1 class="count" style="color:red; padding-top: 2%;">
-                    {{ last_month_note_count }}
-                </h1>
-                <p style="font-size: 20px; color: blue">
-                    Total Books Read<br>This Month
-                </p>
+            {% for note in all_notes %}
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center" style="margin-top: 2%;">
+                <a href="{% url 'note_detail' note.slug %}" class="card" style="border-radius: 0; text-decoration: none;">
+                    <p style="font-size: 20px; padding-top: 2%;">
+                        {{ note.note_title|truncatechars:25 }}
+                    </p>
+                </a>
             </div>
-        </div>
+            {% endfor %}
+
         {% endif %}
     </div>
+    {% if all_notes.has_other_pages %}
+    <ul class="pagination">
+        {% if all_notes.has_previous %}
+            <li><a class="page-link" href="?page={{ all_notes.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&laquo;</span>
+            </li>
+        {% endif %}
+        {% for i in all_notes.paginator.page_range %}
+            {% if all_notes.number == i %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a>
+                </li>
+            {% else %}
+                <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if all_notes.has_next %}
+            <li><a class="page-link" href="?page={{ all_notes.next_page_number }}">&raquo;</a></li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&raquo;</span>
+            </li>
+        {% endif %}
+    </ul>
+    {% endif %}
 </div>
 {% endblock %}
 

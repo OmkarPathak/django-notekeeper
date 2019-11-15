@@ -54,5 +54,5 @@ class AddNoteForm(forms.ModelForm):
                     'data-role':'tagsinput',
                 }
             ),
-            'note_content': SummernoteWidget(),
+            'note_content': SummernoteInplaceWidget(),
         }

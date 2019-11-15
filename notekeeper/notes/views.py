@@ -5,10 +5,13 @@ from django.contrib import messages
 import json
 from datetime import datetime, timedelta 
 import os
+from django.core.paginator import Paginator
 
 
 def home(request):
-    notes = Note.objects.filter(user=request.user).order_by('updated_at')
+    notes = Note.objects.filter(user=request.user).order_by('updated_at')[:10]
+    all_notes = Note.objects.filter(user=request.user).order_by('updated_at')
+    paginator = Paginator(all_notes, 20)
     form_error = False
     last_month = datetime.today() - timedelta(days=30)
     last_month_note_count = Note.objects.filter(
@@ -30,12 +33,14 @@ def home(request):
             form_error = True
     else:
         form = AddNoteForm()
+    page = request.GET.get('page')
+    all_notes = paginator.get_page(page)
     context = {
         'notes': notes,
+        'all_notes': all_notes,
         'add_note_form': form,
         'form_error': form_error,
         'last_month_note_count': last_month_note_count,
-        'total_notes': len(notes),
     }
     return render(request, 'notes.html', context)
 
@@ -45,7 +50,7 @@ def get_note_details(request, slug):
         messages.error(request, 'You are not authenticated to perform this action')
         return redirect('notes')
 
-    notes = Note.objects.filter(user=request.user).order_by('updated_at')
+    notes = Note.objects.filter(user=request.user).order_by('updated_at')[:10]
     add_note_form = AddNoteForm()
 
     context = {
