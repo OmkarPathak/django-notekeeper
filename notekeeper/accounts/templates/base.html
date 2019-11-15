@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
     <link rel="stylesheet" href="{% static 'css/b4_sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'css/tagsinput.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
@@ -34,7 +35,7 @@
               <ul class="nav nav-pills flex-column">
                 {% for note in notes %}
                 <li class="nav-item" id="note_details">
-                  <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.updated_at|date:"d M Y" }} :</span> {{ note.note_title }}</a>
+                  <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.note_title|truncatechars:40 }}</a>
                 </li>
                 {% endfor %}
               </ul>

@@ -21,11 +21,18 @@
         {% else %}
 
             {% for note in all_notes %}
-            <div class="col-lg-4 col-md-4 col-sm-12 text-center" style="margin-top: 2%;">
-                <a href="{% url 'note_detail' note.slug %}" class="card" style="border-radius: 0; text-decoration: none;">
-                    <p style="font-size: 20px; padding-top: 2%;">
-                        {{ note.note_title|truncatechars:25 }}
-                    </p>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top: 2%;">
+                <a href="{% url 'note_detail' note.slug %}" class="card" 
+                    style="border-radius: 0; text-decoration: none;">
+                    <div>
+                        <p style="font-size: 22px; padding-top: 2%; margin-left: 2%;">
+                            {{ note.note_title|truncatechars:25 }}
+                        </p>
+                
+                        <p class="float-left" style="color: gray; margin-left: 2%; font-size: 12px;">
+                            {{ note.updated_at|date:"d M Y" }}
+                        </p>
+                    </div>
                 </a>
             </div>
             {% endfor %}

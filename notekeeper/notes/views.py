@@ -9,9 +9,9 @@ from django.core.paginator import Paginator
 
 
 def home(request):
-    notes = Note.objects.filter(user=request.user).order_by('updated_at')[:10]
-    all_notes = Note.objects.filter(user=request.user).order_by('updated_at')
-    paginator = Paginator(all_notes, 20)
+    notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
+    all_notes = Note.objects.filter(user=request.user).order_by('-updated_at')
+    paginator = Paginator(all_notes, 15)
     form_error = False
     last_month = datetime.today() - timedelta(days=30)
     last_month_note_count = Note.objects.filter(
@@ -50,7 +50,7 @@ def get_note_details(request, slug):
         messages.error(request, 'You are not authenticated to perform this action')
         return redirect('notes')
 
-    notes = Note.objects.filter(user=request.user).order_by('updated_at')[:10]
+    notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
     add_note_form = AddNoteForm()
 
     context = {
