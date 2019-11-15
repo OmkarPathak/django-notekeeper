@@ -5,10 +5,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('notes', '0002_auto_20191114_1548'),
-    ]
-
     operations = [
         migrations.AlterField(
             model_name='note',
