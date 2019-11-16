@@ -8,16 +8,19 @@
         <div class="col-lg-12 col-md-12">
             {% if note_detail %}
                 <div class="row">
-                    <h3 class="col-10" style="width: 100%; word-wrap: break-word;">
+                    <h3 class="col-lg-10 col-md-10 col-sm-12" style="width: 100%; word-wrap: break-word;">
                         <p class="text-wrap">
                             {{ note_detail.note_title }}
                         </p>
                     </h3>
-                    <span class="float-right col-2">
-                        <a class="open-modal" data-url="{% url 'note_details_edit' note_detail.id %}" style="text-decoration: none; color: white">    
+                    <span class="float-right col-lg-2 col-md-2 col-sm-12">
+                        <a class="open-modal" data-url="{% url 'note_details_edit' note_detail.id %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Edit Note">    
                             <span class="btn btn-primary" style="border-radius: 0;"><i class="far fa-edit"> </i></span>
                         </a>
-                        <span class="btn btn-danger" style="border-radius: 0;" data-toggle="modal" data-target="#delete_note_confirmation">
+                        <a href="{% url 'note_as_pdf' note_detail.slug %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Download Note as PDF">    
+                            <span class="btn btn-primary" style="border-radius: 0;"><i class="fa fa-download"> </i></span>
+                        </a>
+                        <span class="btn btn-danger" style="border-radius: 0;" data-toggle="modal" data-target="#delete_note_confirmation"  data-toggle="tooltip" title="Delete Note">
                             <i class="far fa-trash-alt"> </i>
                         </span>
                     </span>

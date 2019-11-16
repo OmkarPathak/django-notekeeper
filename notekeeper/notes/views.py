@@ -4,8 +4,48 @@ from .models import Note, AddNoteForm
 from django.contrib import messages
 import json
 from datetime import datetime, timedelta 
-import os
 from django.core.paginator import Paginator
+from django.http import JsonResponse, HttpResponse
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
+
+def render_to_pdf(template_src, context_dict={}):
+    '''
+        Helper function to generate pdf from html
+    '''
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return HttpResponse("Error Rendering PDF", status=400)
+
+
+def generate_pdf(request, slug):
+    note = get_object_or_404(Note, slug=slug)
+    if note.user != request.user:
+        messages.error(request, 'You are not authenticated to perform this action')
+        return redirect('notes')
+    notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
+    add_note_form = AddNoteForm()
+
+    context = {
+        'notes': notes,
+        'note_detail': note,
+        'add_note_form': add_note_form,
+    }
+    pdf = render_to_pdf('note_as_pdf.html', context)
+    if pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "note.pdf"
+        content = "inline; filename={}".format(filename)
+        content = "attachment; filename={}".format(filename)
+        response['Content-Disposition'] = content
+        return response
+    return HttpResponse("Not found")
 
 
 def home(request):

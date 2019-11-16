@@ -24,5 +24,6 @@ urlpatterns = [
     path('notes/<slug:slug>/', login_required(views.get_note_details), name='note_detail'),
     path('notes/<int:pk>/delete/', login_required(views.delete_note), name='delete_single_note'),
     path('notes/<int:pk>/edit/', login_required(views.edit_note_details), name='note_details_edit'),
+    path('notes/<slug:slug>/pdf', login_required(views.generate_pdf), name='note_as_pdf'),
     path('', login_required(views.home), name='home')
 ]
