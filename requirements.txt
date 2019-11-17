@@ -2,6 +2,13 @@ Django==2.2.7
 django-crispy-forms==1.8.0
 django-summernote==0.8.11.4
 django-taggit==1.1.0
+html5lib==1.0.1
+Pillow==6.2.1
+PyPDF2==1.26.0
 python-decouple==3.2
 pytz==2019.3
+reportlab==3.5.32
+six==1.13.0
 sqlparse==0.3.0
+webencodings==0.5.1
+xhtml2pdf==0.2.3
