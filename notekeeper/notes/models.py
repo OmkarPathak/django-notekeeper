@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
+
 def generate_unique_slug(_class, field):
     """
         return unique slug if origin slug is exist.

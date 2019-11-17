@@ -33,6 +33,14 @@
                             </p>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        {% for tag in note_detail.tags.all %}
+                            <span class="badge badge-primary">{{ tag.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
                 <hr>
                 <div class="row">
                     <div class="col-12">

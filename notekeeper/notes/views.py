@@ -84,6 +84,7 @@ def home(request):
     }
     return render(request, 'notes.html', context)
 
+
 def get_note_details(request, slug):
     note = get_object_or_404(Note, slug=slug)
     if note.user != request.user:
@@ -99,6 +100,7 @@ def get_note_details(request, slug):
         'add_note_form': add_note_form,
     }
     return render(request, 'note_details.html', context)
+
 
 def edit_note_details(request, pk):
     note = get_object_or_404(Note, pk=pk)
@@ -121,6 +123,7 @@ def edit_note_details(request, pk):
         }, instance=note)
         return render(request, 'modals/edit_note_modal.html', {'form': form})
 
+
 def delete_note(request, pk):
     note = get_object_or_404(Note, pk=pk)
     if note.user != request.user:
@@ -128,6 +131,7 @@ def delete_note(request, pk):
         return redirect('notes')
     note.delete()
     return redirect('notes')
+
 
 def search_note(request):
     if request.is_ajax():
