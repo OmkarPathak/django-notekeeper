@@ -23,7 +23,7 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body style="font-family: 'Poppins', sans-serif;">
-    {% include 'navbar.html' %}
+    {% include 'navbar.html' %}   
     <div class="row-offcanvas row-offcanvas-left">
         <div id="sidebar" class="sidebar-offcanvas">
             <div class="col-lg-12 col-md-12" style="padding: 0; margin-top: 4%">
@@ -41,10 +41,7 @@
               </ul>
             </div>
         </div>
-        <div id="main">
-            <div style="margin-top: 2%;" class="row">
-                <button type="button" class="btn btn-primary btn-block d-block d-sm-block d-md-none" id="offcanvas" data-toggle="offcanvas" style=" border-radius: 0; margin-left: 5%; margin-right: 5%;">Show/Add Notes</button>
-            </div>
+        <div id="main" style="padding-top: 3%;">
             {% block content %}
             {% endblock %}
         </div>
