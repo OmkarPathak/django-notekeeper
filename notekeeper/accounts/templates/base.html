@@ -126,6 +126,18 @@
       $(document).ready(function(){
           $('[data-toggle="tooltip"]').tooltip(); 
       });
+
+      $('#copy_shareable_link').on('click', function(){
+        /* Get the text field */
+        var copyText = document.getElementById("shareable_link");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+    });
     </script>
   </body>
 </html>

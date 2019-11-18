@@ -123,10 +123,13 @@ def get_note_details(request, slug):
     notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
     add_note_form = AddNoteForm()
 
+    absolute_url = request.build_absolute_uri(note.get_absolute_url())
+
     context = {
         'notes': notes,
         'note_detail': note,
         'add_note_form': add_note_form,
+        'absolute_url': absolute_url
     }
     return render(request, 'note_details.html', context)
 

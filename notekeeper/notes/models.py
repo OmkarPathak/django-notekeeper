@@ -7,6 +7,7 @@ from taggit.managers import TaggableManager
 from django.core.signing import Signer
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 import uuid
+from django.urls import reverse
 
 
 def generate_unique_slug(_class, field):
@@ -35,9 +36,11 @@ class Note(models.Model):
     signer = Signer(salt='notes.Note')
 
     def get_signed_hash(self):
-        print('pk:', self.pk)
         signed_pk = self.signer.sign(self.pk)
         return signed_pk
+
+    def get_absolute_url(self):
+        return reverse('share_notes', args=(self.get_signed_hash(),))
 
     def __str__(self):
         return self.note_title

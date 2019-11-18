@@ -13,25 +13,36 @@
                             {{ note_detail.note_title }}
                         </p>
                     </h3>
-                    <span class="float-right col-lg-2 col-md-2 col-sm-12">
-                        <a class="open-modal" data-url="{% url 'note_details_edit' note_detail.id %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Edit Note">    
-                            <span class="btn btn-primary" style="border-radius: 0;"><i class="far fa-edit"> </i></span>
-                        </a>
-                        <a href="{% url 'note_as_pdf' note_detail.slug %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Download Note as PDF">    
-                            <span class="btn btn-primary" style="border-radius: 0;"><i class="fa fa-download"> </i></span>
-                        </a>
-                        <span class="btn btn-danger" style="border-radius: 0;" data-toggle="modal" data-target="#delete_note_confirmation"  data-toggle="tooltip" title="Delete Note">
-                            <i class="far fa-trash-alt"> </i>
-                        </span>
+                    <span class="col-lg-2 col-md-2 col-sm-12">
+                        <div class="float-right">
+                            <a class="open-modal" data-url="{% url 'note_details_edit' note_detail.id %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Edit Note">    
+                                <span class="btn btn-primary" style="border-radius: 0;"><i class="far fa-edit"> </i></span>
+                            </a>
+                            <a href="{% url 'note_as_pdf' note_detail.slug %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Download Note as PDF">    
+                                <span class="btn btn-primary" style="border-radius: 0;"><i class="fa fa-download"> </i></span>
+                            </a>
+                            <span class="btn btn-danger" style="border-radius: 0;" data-toggle="modal" data-target="#delete_note_confirmation"  data-toggle="tooltip" title="Delete Note">
+                                <i class="far fa-trash-alt"> </i>
+                            </span>
+                        </div>
                     </span>
                 </div>
                 
                 <div class="row">
-                    <div class="col-12">
-                            <p style="color: gray; font-size: 15px;" data-toggle="tooltip" title="Created at: {{ note_detail.created_at }}">
-                                Last Updated: {{ note_detail.updated_at }}<br>
-                                Shareable Link: <a href="{% url 'share_notes' note_detail.get_signed_hash %}">Share</a>
-                            </p>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <p style="color: gray; font-size: 15px;" data-toggle="tooltip" title="Created at: {{ note_detail.created_at }}">
+                            Last Updated: {{ note_detail.updated_at }}<br>
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <p class="float-right">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="shareable_link" value="{{ absolute_url }}" readonly>
+                                <div class="input-group-append">
+                                    <span id="copy_shareable_link" class="input-group-text"><span data-toggle="tooltip" title="Copy Shareable Link" style="cursor: pointer;"><i class="far fa-copy"> </i></span></span>
+                                </div>
+                            </div>
+                        </p>
                     </div>
                 </div>
 
