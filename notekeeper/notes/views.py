@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import Note, AddNoteForm
 from django.contrib import messages
 import json, os
@@ -10,6 +10,7 @@ from io import BytesIO
 from django.conf import settings
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.core.signing import BadSignature
 
 
 def link_callback(uri, rel):
@@ -183,3 +184,15 @@ def search_note(request):
         note_json['value'] = None
         data = json.dumps(note_json)
     return HttpResponse(data)
+
+
+def get_shareable_link(request, signed_pk):
+    try:
+        pk = Note.signer.unsign(signed_pk)
+        note = Note.objects.get(pk=pk)
+        context = {
+            'note_detail': note
+        }
+        return render(request, 'shared_note.html', context)
+    except (BadSignature, Note.DoesNotExist):
+        raise Http404('No Order matches the given query.')

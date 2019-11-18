@@ -29,7 +29,8 @@
                 <div class="row">
                     <div class="col-12">
                             <p style="color: gray; font-size: 15px;" data-toggle="tooltip" title="Created at: {{ note_detail.created_at }}">
-                                Last Updated: {{ note_detail.updated_at }}
+                                Last Updated: {{ note_detail.updated_at }}<br>
+                                Shareable Link: <a href="{% url 'share_notes' note_detail.get_signed_hash %}">Share</a>
                             </p>
                     </div>
                 </div>

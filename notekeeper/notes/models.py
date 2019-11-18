@@ -1,9 +1,12 @@
 from django.db import models
 from django import forms
+from django.shortcuts import redirect
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from django.core.signing import Signer
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+import uuid
 
 
 def generate_unique_slug(_class, field):
@@ -20,6 +23,7 @@ def generate_unique_slug(_class, field):
         numb += 1
     return unique_slug
 
+
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     note_title = models.CharField(max_length=200)
@@ -28,6 +32,12 @@ class Note(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True)
     tags = TaggableManager()
+    signer = Signer(salt='notes.Note')
+
+    def get_signed_hash(self):
+        print('pk:', self.pk)
+        signed_pk = self.signer.sign(self.pk)
+        return signed_pk
 
     def __str__(self):
         return self.note_title
@@ -40,9 +50,6 @@ class Note(models.Model):
             self.slug = generate_unique_slug(Note, self.note_title)
         super(Note, self).save(*args, **kwargs)
 
-
-class DateInput(forms.DateInput):
-    input_type = 'date'
 
 class AddNoteForm(forms.ModelForm):
     class Meta:
