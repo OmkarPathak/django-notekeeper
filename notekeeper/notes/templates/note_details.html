@@ -8,13 +8,13 @@
         <div class="col-lg-12 col-md-12">
             {% if note_detail %}
                 <div class="row">
-                    <h3 class="col-lg-10 col-md-10 col-sm-12" style="width: 100%; word-wrap: break-word;">
+                    <h3 class="col-10" style="width: 100%; word-wrap: break-word;">
                         <p class="text-wrap">
                             {{ note_detail.note_title }}
                         </p>
                     </h3>
-                    <span class="col-lg-2 col-md-2 col-sm-12">
-                        <div class="float-right">
+                    <span class="col-2">
+                        <div class="float-right d-none d-md-block d-lg-block">
                             <a class="open-modal" data-url="{% url 'note_details_edit' note_detail.id %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Edit Note">    
                                 <span class="btn btn-primary" style="border-radius: 0;"><i class="far fa-edit"> </i></span>
                             </a>
@@ -25,6 +25,25 @@
                                 <i class="far fa-trash-alt"> </i>
                             </span>
                         </div>
+
+                        <ul class="navbar-nav d-md-none d-lg-none d-sm-block d-xs-block">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link btn btn-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span><i class="fas fa-ellipsis-h"></i></span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="open-modal dropdown-item" data-url="{% url 'note_details_edit' note_detail.id %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Edit Note">    
+                                        <span class="btn btn-block btn-primary" style="border-radius: 0;"><i class="far fa-edit"></i> Edit</span>
+                                    </a>
+                                    <a class="dropdown-item" href="{% url 'note_as_pdf' note_detail.slug %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Download Note as PDF">    
+                                        <span class="btn btn-block btn-primary" style="border-radius: 0;"><i class="fa fa-download"></i> Download</span>
+                                    </a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#delete_note_confirmation"  data-toggle="tooltip" title="Delete Note">
+                                        <span class="btn btn-block btn-danger" style="border-radius: 0;"><i class="far fa-trash-alt"></i> Delete</span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
                     </span>
                 </div>
                 
