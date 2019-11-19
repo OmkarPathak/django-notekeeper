@@ -69,7 +69,7 @@ def generate_pdf(request, slug):
     pdf = render_to_pdf('note_as_pdf.html', context)
     if pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
-        filename = "note.pdf"
+        filename = "{}.pdf".format(note.slug)
         content = "inline; filename={}".format(filename)
         content = "attachment; filename={}".format(filename)
         response['Content-Disposition'] = content
