@@ -18,6 +18,13 @@ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     border-bottom: 0.1px solid lightgray;
 }
 
+/* remove modal border */
+.modal-content  {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
+
 .asteriskField{
     color: red;
 }

@@ -21,9 +21,9 @@
                             <a href="{% url 'note_as_pdf' note_detail.slug %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Download Note as PDF">    
                                 <span class="btn btn-primary" style="border-radius: 0;"><i class="fa fa-download"> </i></span>
                             </a>
-                            <span class="btn btn-danger" style="border-radius: 0;" data-toggle="modal" data-target="#delete_note_confirmation"  data-toggle="tooltip" title="Delete Note">
-                                <i class="far fa-trash-alt"> </i>
-                            </span>
+                            <a class="open-delete-modal" data-url="{% url 'confirm_delete_note' note_detail.id %}" data-toggle="tooltip" title="Delete Note">
+                                <span class="btn btn-danger" style="border-radius: 0;"><i class="far fa-trash-alt"></i></span>
+                            </a>
                         </div>
 
                         <ul class="navbar-nav d-md-none d-lg-none d-sm-block d-xs-block">
@@ -38,8 +38,8 @@
                                     <a class="dropdown-item" href="{% url 'note_as_pdf' note_detail.slug %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Download Note as PDF">    
                                         <span class="btn btn-block btn-primary" style="border-radius: 0;"><i class="fa fa-download"></i> Download</span>
                                     </a>
-                                    <a class="dropdown-item" data-toggle="modal" data-target="#delete_note_confirmation"  data-toggle="tooltip" title="Delete Note">
-                                        <span class="btn btn-block btn-danger" style="border-radius: 0;"><i class="far fa-trash-alt"></i> Delete</span>
+                                    <a class="dropdown-item open-delete-modal" data-url="{% url 'confirm_delete_note' note_detail.id %}" data-toggle="tooltip" title="Delete Note">
+                                        <span class="btn btn-danger btn-block" style="border-radius: 0;"><i class="far fa-trash-alt"></i> Delete</span>
                                     </a>
                                 </div>
                             </li>
@@ -83,50 +83,31 @@
     </div>
 </div>
 
-<!-- The result get appended here -->
-<div class="modal-div"></div>
-
 <!-- Delete Note Modal -->
 <div class="modal fade" id="delete_note_confirmation">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-    
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Confirm Deletion</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-    
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="row container">
-                    <h5>Are you sure you want to delete "{{ note_detail.note_title }}"?</h5>
-                </div>
-            </div>
-    
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-danger"><a href="{% url 'delete_single_note' note_detail.id %}" style="text-decoration: none; color: white">Delete</a></button>
-            </div>
-    
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Confirm Deletion</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="row container">
+                <h5>Are you sure you want to delete "{{ note_detail.note_title }}"?</h5>
             </div>
         </div>
-    </div>
-{% endblock %}
 
-{% block javascript %}
-<script>
-    var modalDiv = $(".modal-div");
-    $(".open-modal").on("click", function() {
-    $.ajax({
-        type: 'GET',
-        url: $(this).attr("data-url"),
-        success: function(data) {
-            modalDiv.html(data);
-            $("#edit_note").modal();
-        }
-    });
-    });
-</script>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Cancel">
+            <button type="button" class="btn btn-danger"><a href="{% url 'delete_single_note' note_detail.id %}" style="text-decoration: none; color: white">Delete</a></button>
+        </div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}

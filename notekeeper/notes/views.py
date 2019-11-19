@@ -80,7 +80,7 @@ def generate_pdf(request, slug):
 def home(request):
     notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
     all_notes = Note.objects.filter(user=request.user).order_by('-updated_at')
-    paginator = Paginator(all_notes, 15)
+    # paginator = Paginator(all_notes, 15)
     form_error = False
     last_month = datetime.today() - timedelta(days=30)
     last_month_note_count = Note.objects.filter(
@@ -103,7 +103,7 @@ def home(request):
     else:
         form = AddNoteForm()
     page = request.GET.get('page')
-    all_notes = paginator.get_page(page)
+    # all_notes = paginator.get_page(page)
     context = {
         'notes': notes,
         'all_notes': all_notes,
@@ -156,12 +156,24 @@ def edit_note_details(request, pk):
         return render(request, 'modals/edit_note_modal.html', {'form': form})
 
 
+def confirm_delete_note(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    if note.user != request.user:
+        messages.error(request, 'You are not authenticated to perform this action')
+        return redirect('notes')
+    # note.delete()
+    context = {
+        'note_detail': note,
+    }
+    return render(request, 'modals/delete_note_modal.html', context)
+
 def delete_note(request, pk):
     note = get_object_or_404(Note, pk=pk)
     if note.user != request.user:
         messages.error(request, 'You are not authenticated to perform this action')
         return redirect('notes')
     note.delete()
+    messages.success(request, 'Note deleted successfully!')
     return redirect('notes')
 
 

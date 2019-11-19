@@ -19,68 +19,37 @@
             </p>
         </div>
         {% else %}
-
-            {% for note in all_notes %}
-            <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top: 2%;">
-                <a href="{% url 'note_detail' note.slug %}" class="card" 
-                    style="border-radius: 0; text-decoration: none;">
-                    <div>
-                        <p style="font-size: 22px; padding-top: 2%; margin-left: 2%;">
-                            {{ note.note_title|truncatechars:25 }}
-                        </p>
-                
-                        <p class="float-left" style="color: gray; margin-left: 2%; font-size: 12px;">
-                            {{ note.updated_at|date:"d M Y" }}
-                        </p>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <table class="table table-striped table-bordered" id="all_notes">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th scope="col">Title</th>
+                        <th scope="col">Last Updated</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for note in all_notes %}
+                    <tr>
+                        <td><a href="{% url 'note_detail' note.slug %}">{{ note.note_title|truncatechars:25 }}</a></td>
+                        <td>{{ note.updated_at }}</td>
+                        <td class="text-center">
+                            <a class="open-modal" data-url="{% url 'note_details_edit' note.id %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Edit Note">    
+                                <span class="btn btn-primary" style="border-radius: 0;"><i class="far fa-edit"> </i></span>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="open-delete-modal" data-url="{% url 'confirm_delete_note' note.id %}" data-toggle="tooltip" title="Delete Note">
+                                <span class="btn btn-danger" style="border-radius: 0;"><i class="far fa-trash-alt"></i></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {% endif %}
     </div>
-    {% if all_notes.has_other_pages %}
-    <ul class="pagination">
-        {% if all_notes.has_previous %}
-            <li><a class="page-link" href="?page={{ all_notes.previous_page_number }}">&laquo;</a></li>
-        {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">&laquo;</span>
-            </li>
-        {% endif %}
-        {% for i in all_notes.paginator.page_range %}
-            {% if all_notes.number == i %}
-                <li class="page-item active">
-                    <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a>
-                </li>
-            {% else %}
-                <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
-        {% endfor %}
-        {% if all_notes.has_next %}
-            <li><a class="page-link" href="?page={{ all_notes.next_page_number }}">&raquo;</a></li>
-        {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">&raquo;</span>
-            </li>
-        {% endif %}
-    </ul>
-    {% endif %}
 </div>
-{% endblock %}
-
-{% block javascript %}
-<script>
-$('.count').each(function () {
-    $(this).prop('Counter',0).animate({
-        Counter: $(this).text()
-    }, {
-        duration: 1000,
-        easing: 'swing',
-        step: function (now) {
-            $(this).text(Math.ceil(now));
-        }
-    });
-});
-</script>
 {% endblock %}

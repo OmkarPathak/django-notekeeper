@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{% static 'css/b4_sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'css/tagsinput.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
@@ -41,13 +42,16 @@
               </ul>
             </div>
         </div>
-        <div id="main" style="padding-top: 3%;">
+        <div id="main" style="padding-top: 2%;">
             {% block content %}
             {% endblock %}
         </div>
     </div><!--/row-offcanvas -->
 
-    <!-- The Modal -->
+    <div class="edit-modal-div"></div>
+    <div class="delete-modal-div"></div>
+
+    <!-- Add Modal -->
     <div class="modal fade" id="add_note">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -87,6 +91,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="{% static 'js/b4_sidebar.js' %}"></script>
     <script src="{% static 'js/tagsinput.js' %}"></script>
     {% block javascript %}
@@ -94,6 +100,9 @@
     <script>
       $(document).ready(function() {
         initSummernote();
+        $('#all_notes').DataTable({
+          "order": []
+        });
 
         $('#offcanvas').click(function() {
           $('.row-offcanvas').toggleClass('active');
@@ -135,6 +144,34 @@
         /* Copy the text inside the text field */
         document.execCommand("copy");
     });
+    </script>
+
+    <script>
+        var modalDiv = $(".delete-modal-div");
+        $(".open-delete-modal").on("click", function() {
+        $.ajax({
+            type: 'GET',
+            url: $(this).attr("data-url"),
+            success: function(data) {
+                modalDiv.html(data);
+                $("#delete_note_confirmation").modal();
+            }
+        });
+        });
+    </script>
+
+    <script>
+        var modalDiv = $(".edit-modal-div");
+        $(".open-modal").on("click", function() {
+        $.ajax({
+            type: 'GET',
+            url: $(this).attr("data-url"),
+            success: function(data) {
+                modalDiv.html(data);
+                $("#edit_note").modal();
+            }
+        });
+        });
     </script>
   </body>
 </html>
