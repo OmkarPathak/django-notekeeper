@@ -13,9 +13,17 @@
     <div class="navbar-collapse collapse" id="navbarNav">
         {% if request.user.is_authenticated %}
         <ul class="navbar-nav ml-auto">
-            <!-- <li class="nav-item" id="offcanvas" data-toggle="offcanvas">
-                <a class="nav-link">Show/Add Notes</a>
-            </li> -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="notes_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Notes
+                </a>
+                <div class="dropdown-menu" aria-labelledby="notes_dropdown">
+                    <a id="a_d" class="dropdown-item" data-toggle="modal" data-target="#add_note" style="cursor: pointer;">
+                        Add Note
+                    </a>
+                    <a class="dropdown-item" href="{% url 'notes' %}">Show All Notes</a>
+                </div>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Welcome, {{ request.user.username }}
@@ -26,7 +34,6 @@
                 </div>
             </li>
         </ul>
-
         {% else %}
         <ul class="navbar-nav ml-auto">
             <li class="nav-item {% if request.resolver_match.url_name == 'login' %} active {% endif %}">
