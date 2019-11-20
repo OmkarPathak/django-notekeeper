@@ -11,6 +11,7 @@
             <form method="POST" action="{% url 'note_details_edit' form.instance.id %}">
                 <div class="modal-body">
                     {% csrf_token %}
+                    {{ add_note_form.media }}
                     {% for field in form %}
                     <div class="form-group col-lg-12 col-md-12">
                         {{ field | as_crispy_field }}
