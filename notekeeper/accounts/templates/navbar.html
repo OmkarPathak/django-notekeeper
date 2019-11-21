@@ -7,8 +7,8 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <button class="ml-auto btn d-sm-block d-md-none d-lg-none" id="offcanvas" data-toggle="offcanvas" style="background-color: transparent;border-color: gray;">
-        <span class="navbar-toggler-icon"></span>
+    <button class="ml-auto btn d-lg-none d-md-none d-sm-block d-xs-block" data-toggle="modal" data-target="#add_note" style="cursor: pointer; background-color: transparent;border-color: gray;">
+        <span class="fa fa-plus" style="color: white;"></span>
     </button>
     <div class="navbar-collapse collapse" id="navbarNav">
         {% if request.user.is_authenticated %}

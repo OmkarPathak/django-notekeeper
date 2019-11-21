@@ -86,6 +86,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Loader Div -->
+    <div class="loader"></div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -99,9 +102,12 @@
     {% endblock %}
     <script>
       $(document).ready(function() {
+        $('.loader').hide();
         initSummernote();
         $('#all_notes').DataTable({
-          "order": []
+          "order": [],
+          responsive: true,
+          // "lengthChange": false
         });
 
         $('#offcanvas').click(function() {
@@ -152,8 +158,12 @@
         $.ajax({
             type: 'GET',
             url: $(this).attr("data-url"),
+            beforeSend: function() {
+                $(".loader").show();
+            },
             success: function(data) {
                 modalDiv.html(data);
+                $(".loader").hide();
                 $("#delete_note_confirmation").modal();
             }
         });
@@ -166,8 +176,12 @@
         $.ajax({
             type: 'GET',
             url: $(this).attr("data-url"),
+            beforeSend: function() {
+                $(".loader").show();
+            },
             success: function(data) {
                 modalDiv.html(data);
+                $(".loader").hide();
                 $("#edit_note").modal();
             }
         });
