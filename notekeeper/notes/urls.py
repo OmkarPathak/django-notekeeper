@@ -27,5 +27,6 @@ urlpatterns = [
     path('notes/<int:pk>/edit/', login_required(views.edit_note_details), name='note_details_edit'),
     path('notes/<slug:slug>/pdf/', login_required(views.generate_pdf), name='note_as_pdf'),
     path('notes/share/<str:signed_pk>/', views.get_shareable_link, name='share_notes'),
+    path('tags/<slug:slug>/', views.get_all_notes_tags, name='get_all_notes_tags'),
     path('', login_required(views.home), name='home')
 ]

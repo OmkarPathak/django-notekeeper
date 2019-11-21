@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="col-12">
                         {% for tag in note_detail.tags.all %}
-                            <span class="badge badge-primary">{{ tag.name }}</span>
+                            <a href="{% url 'get_all_notes_tags' tag.slug %}"><span class="badge badge-primary">{{ tag.name }}</span></a>
                         {% endfor %}
                     </div>
                 </div>

@@ -11,6 +11,7 @@ from django.conf import settings
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.core.signing import BadSignature
+from taggit.models import Tag
 
 
 def link_callback(uri, rel):
@@ -211,3 +212,16 @@ def get_shareable_link(request, signed_pk):
         return render(request, 'shared_note.html', context)
     except (BadSignature, Note.DoesNotExist):
         raise Http404('No Order matches the given query.')
+
+
+def get_all_notes_tags(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    # Filter posts by tag name  
+    all_notes = Note.objects.filter(tags=tag, user=request.user)
+    notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
+    context = {
+        'tag':tag,
+        'all_notes':all_notes,
+        'notes': notes
+    }
+    return render(request, 'tags.html', context)
