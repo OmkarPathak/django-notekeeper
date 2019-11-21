@@ -219,9 +219,11 @@ def get_all_notes_tags(request, slug):
     # Filter posts by tag name  
     all_notes = Note.objects.filter(tags=tag, user=request.user)
     notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
+    add_note_form = AddNoteForm()
     context = {
         'tag':tag,
         'all_notes':all_notes,
-        'notes': notes
+        'notes': notes,
+        'add_note_form': add_note_form
     }
     return render(request, 'tags.html', context)
