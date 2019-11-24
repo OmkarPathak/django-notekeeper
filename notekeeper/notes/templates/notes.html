@@ -32,7 +32,7 @@
                 <tbody>
                 {% for note in all_notes %}
                     <tr>
-                        <td><a href="{% url 'note_detail' note.slug %}">{{ note.note_title|truncatechars:25 }}</a></td>
+                        <td><a href="{% url 'note_detail' note.slug %}">{{ note.note_title|truncatechars:45 }}</a></td>
                         <td>{{ note.updated_at }}</td>
                         <td class="text-center">
                             <a class="open-modal" data-url="{% url 'note_details_edit' note.id %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Edit Note">    
