@@ -92,8 +92,8 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="{% static 'js/b4_sidebar.js' %}"></script>
@@ -101,6 +101,25 @@
     {% block javascript %}
     {% endblock %}
     <script>
+      function getSelectionText(){
+        // http://www.javascriptkit.com/javatutors/copytoclipboard.shtml
+        var selectedText = "";
+        if (window.getSelection){ // all modern browsers and IE9+
+            selectedText = window.getSelection().toString();
+        }
+        return selectedText;
+      }
+
+      $(document).on('mouseup','#note_details',function(e) {
+        var thetext = getSelectionText()
+          if (thetext.length > 0){ // check there's some text selected
+            document.execCommand('copy'); // copies whatever textual content the user has selected on the page
+            // e.target.insertAdjacentHTML( 'afterbegin', '<div id="selected_text" data-toggle="tooltip" title="Copied"></div>');
+            // $("#selected_text").tooltip('toggle');
+            // alert(thetext);
+          }
+      });
+
       $(document).ready(function() {
         $('.loader').hide();
         initSummernote();
