@@ -3,6 +3,14 @@ A pretty easy django notes app. Have a note save it!
 
 ### Built with ♥ and :coffee: by [`Omkar Pathak`](http://www.omkarpathak.in/)
 
+## Features
+
+- CRUD notes
+- Copies selected text automatically
+- Easily share
+- Download note as PDF
+- Beautiful yet simple UI
+
 # Installation
 
 - Clone the repository
