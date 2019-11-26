@@ -5,6 +5,9 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.nav-pills > .nav-item > .nav-link{
+    border-radius: 0;
+}
 .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
