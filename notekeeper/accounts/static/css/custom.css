@@ -2,8 +2,12 @@
 {
     width:100%;
     white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.leftNavbarToggler{
+    margin-right:10px;
+    order:-1
 }
 .nav-pills > .nav-item > .nav-link{
     border-radius: 0;
