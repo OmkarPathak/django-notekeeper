@@ -25,28 +25,28 @@
   </head>
   <body style="font-family: 'Poppins', sans-serif;">
     {% include 'navbar.html' %}   
-    <div class="row-offcanvas row-offcanvas-left">
-        <div id="sidebar" class="sidebar-offcanvas">
-            <div class="col-lg-12 col-md-12" style="padding: 0; margin-top: 4%">
-              <div style="margin-left: 6%; margin-right: 6%;">
-                <h3>Notes <a id="a_d" class="btn float-right" style="font-size: 25px; color: blue; padding-top: 0;"  data-toggle="modal" data-target="#add_note"><i class="fas fa-plus" data-toggle="tooltip" title="Add a new note"></i></a></h3>
-                <input type="text" id="search_note" class="form-control" placeholder="Search">
-              </div>
-              <hr>
-              <ul class="nav nav-pills flex-column">
-                {% for note in notes %}
-                <li class="nav-item" id="note_details">
-                  <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.note_title|truncatechars:40 }}</a>
-                </li>
-                {% endfor %}
-              </ul>
+    <div class="container-fluid h-100">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 d-none d-lg-block d-md-block position-fixed h-100" style="background-color: #f5f5f5; padding-top: 1%;">
+          <div>
+            <h3>Notes <a id="a_d" class="btn float-right" style="font-size: 25px; color: blue; padding-top: 0;"  data-toggle="modal" data-target="#add_note"><i class="fas fa-plus" data-toggle="tooltip" title="Add a new note"></i></a></h3>
+            <input type="text" id="search_note" class="form-control" placeholder="Search">
             </div>
+            <hr>
+            <ul class="nav nav-pills flex-column">
+              {% for note in notes %}
+              <li class="nav-item" id="note_details">
+                <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.note_title|truncatechars:40 }}</a>
+              </li>
+              {% endfor %}
+            </ul>
         </div>
-        <div id="main" style="padding-top: 2%;">
-            {% block content %}
-            {% endblock %}
+        <div class="col-lg-9 col-md-9 offset-md-3 col-sm-12 col-xs-12" style="padding-top: 1%; padding-left: 0; padding-right: 0;">
+          {% block content %}
+          {% endblock %}
         </div>
-    </div><!--/row-offcanvas -->
+      </div>
+    </div>
 
     <div class="edit-modal-div"></div>
     <div class="delete-modal-div"></div>
