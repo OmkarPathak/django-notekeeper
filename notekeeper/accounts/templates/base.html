@@ -35,7 +35,7 @@
             <ul class="nav nav-pills flex-column">
               {% for note in notes %}
               <li class="nav-item" id="note_details">
-                <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.note_title|truncatechars:40 }}</a>
+                <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.note_title|truncatechars:30 }}</a>
               </li>
               {% endfor %}
             </ul>
