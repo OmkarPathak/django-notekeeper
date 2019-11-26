@@ -19,7 +19,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
-    <!-- <link rel="shortcut icon" href="{% static 'images/logomarkv2.ico' %}"> -->
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}">
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body style="font-family: 'Poppins', sans-serif;">
@@ -35,7 +35,7 @@
             <ul class="nav nav-pills flex-column">
               {% for note in notes %}
               <li class="nav-item" id="note_details">
-                <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.note_title|truncatechars:30 }}</a>
+                <a href="{% url 'note_detail' note.slug %}" class="{% add_active request 'note_detail' note.slug %} nav-link"><span style="text-decoration: none !important;">{{ note.note_title|truncatechars:24 }}</a>
               </li>
               {% endfor %}
             </ul>

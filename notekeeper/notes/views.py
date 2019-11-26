@@ -61,11 +61,8 @@ def generate_pdf(request, slug):
         return redirect('notes')
     notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
     add_note_form = AddNoteForm()
-
     context = {
-        'notes': notes,
         'note_detail': note,
-        'add_note_form': add_note_form,
     }
     pdf = render_to_pdf('note_as_pdf.html', context)
     if pdf:
@@ -82,13 +79,7 @@ def home(request):
     notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
     all_notes = Note.objects.filter(user=request.user).order_by('-updated_at')
     # paginator = Paginator(all_notes, 15)
-    form_error = False
-    last_month = datetime.today() - timedelta(days=30)
-    last_month_note_count = Note.objects.filter(
-            user=request.user,
-            created_at__gt=last_month
-        ).count()
-    
+
     if request.method == 'POST':
         form = AddNoteForm(request.POST)
         if form.is_valid():
@@ -99,18 +90,15 @@ def home(request):
             form.save_m2m()
             form = AddNoteForm()
             messages.success(request, 'Note added successfully!')
-        else:
-            form_error = True
+            return redirect('notes')
     else:
         form = AddNoteForm()
-    page = request.GET.get('page')
+    # page = request.GET.get('page')
     # all_notes = paginator.get_page(page)
     context = {
         'notes': notes,
         'all_notes': all_notes,
         'add_note_form': form,
-        'form_error': form_error,
-        'last_month_note_count': last_month_note_count,
     }
     return render(request, 'notes.html', context)
 
