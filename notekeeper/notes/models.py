@@ -5,7 +5,8 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.core.signing import Signer
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django.utils.html import mark_safe
+from markdown import markdown
 import uuid
 from django.urls import reverse
 
@@ -34,6 +35,9 @@ class Note(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     tags = TaggableManager()
     signer = Signer(salt='notes.Note')
+
+    def get_message_as_markdown(self):
+        return mark_safe(markdown(self.note_content, safe_mode='escape'))
 
     def get_signed_hash(self):
         signed_pk = self.signer.sign(self.pk)
@@ -65,5 +69,4 @@ class AddNoteForm(forms.ModelForm):
                     'data-role':'tagsinput',
                 }
             ),
-            'note_content': SummernoteInplaceWidget(),
         }

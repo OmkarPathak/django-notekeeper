@@ -11,7 +11,7 @@
             <form method="POST" action="{% url 'note_details_edit' form.instance.id %}">
                 <div class="modal-body">
                     {% csrf_token %}
-                    {{ add_note_form.media }}
+                    {{ form.media }}
                     {% for field in form %}
                     <div class="form-group col-lg-12 col-md-12">
                         {{ field | as_crispy_field }}
@@ -29,5 +29,13 @@
 
 <script>
 $('#id_tags').tagsinput('refresh');
-initSummernote();
+var simplemde = new SimpleMDE({
+    autofocus: true,
+    autorefresh: true
+});
+// document.getElementById('id_note_content').style.display='block';
+// simplemde.value('Some');
+$('#edit_note').on('shown.bs.modal', function () {
+    simplemde.codemirror.refresh();
+});
 </script>
