@@ -30,7 +30,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-12">
-                        {{ note_detail.note_content|safe }}
+                        {{ note_detail.get_message_as_markdown }}
                     </div>
                 </div>
             {% endif %}
