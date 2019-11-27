@@ -29,7 +29,7 @@ def generate_unique_slug(_class, field):
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     note_title = models.CharField(max_length=200)
-    note_content = models.TextField()
+    note_content = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True)
