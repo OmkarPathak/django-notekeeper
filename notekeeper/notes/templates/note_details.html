@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <p style="color: gray; font-size: 15px;">
-                            Last Updated: {{ note_detail.updated_at|naturaltime }} <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" title="Updated at: {{ note_detail.updated_at}} Created at: {{ note_detail.created_at }}"></i><br>
+                            Last Updated: {{ note_detail.updated_at|naturaltime }} <i class="fa fa-info-circle" aria-hidden="true" data-html="true" data-toggle="tooltip" title="Updated at: {{ note_detail.updated_at}} <br> Created at: {{ note_detail.created_at }}"></i><br>
                         </p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -75,7 +75,7 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12" style="overflow-wrap: break-word">
                         {{ note_detail.get_message_as_markdown }}
                     </div>
                 </div>
