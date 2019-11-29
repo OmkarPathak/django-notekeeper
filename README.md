@@ -38,6 +38,10 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+# Working
+
+![working](results/working.gif)
+
 # Donation
 
 If you have found my softwares to be of any use to you, do consider helping me pay my internet bills. This would encourage me to create many such softwares :)
