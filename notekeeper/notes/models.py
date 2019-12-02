@@ -9,6 +9,7 @@ from django.utils.html import mark_safe
 from markdown import markdown
 import uuid
 from django.urls import reverse
+from unidecode import unidecode
 
 
 def generate_unique_slug(_class, field):
@@ -50,11 +51,12 @@ class Note(models.Model):
         return self.note_title
 
     def save(self, *args, **kwargs):
+        title = unidecode(self.note_title)
         if self.slug:
-            if slugify(self.note_title) != self.slug:
-                self.slug = generate_unique_slug(Note, self.note_title)
+            if slugify(title) != self.slug:
+                self.slug = generate_unique_slug(Note, title)
         else:
-            self.slug = generate_unique_slug(Note, self.note_title)
+            self.slug = generate_unique_slug(Note, title)
         super(Note, self).save(*args, **kwargs)
 
 
