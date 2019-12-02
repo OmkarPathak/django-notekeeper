@@ -50,7 +50,7 @@
 
     <!-- Add Modal -->
     <div class="modal fade" id="add_note">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-lg w-100 mw-100" style="margin-left: 0.5%;">
         <div class="modal-content">
 
           <!-- Modal Header -->
@@ -123,10 +123,11 @@
         var easyMDE = new EasyMDE({
             autofocus: true,
             autorefresh: true,
-            spellChecker: false
+            spellChecker: false,
+            minHeight: '180px'
         });
         $('#all_notes').DataTable({
-          "order": [],
+          order: [],
           responsive: true,
           // "lengthChange": false
         });

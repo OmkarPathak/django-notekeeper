@@ -1,6 +1,6 @@
 {% load crispy_forms_tags %}
 <div id="edit_note" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg w-100 mw-100" style="margin-left: 0.5%;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit "{{ form.instance.note_title }}"</h5>
@@ -32,7 +32,8 @@ $('#id_tags').tagsinput('refresh');
 var easyMDE = new EasyMDE({
     autofocus: true,
     autorefresh: true,
-    spellChecker: false
+    spellChecker: false,
+    minHeight: '180px'
 });
 // document.getElementById('id_note_content').style.display='block';
 // simplemde.value('Some');
