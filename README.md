@@ -1,7 +1,7 @@
 # django-notekeeper
 A pretty easy django notes app. Have a note save it!
 
-### Built with ♥ and :coffee: by [`Omkar Pathak`](http://www.omkarpathak.in/)
+### Built with :heart: and :coffee: by [`Omkar Pathak`](http://www.omkarpathak.in/)
 
 ## Features
 
@@ -24,6 +24,12 @@ git clone https://github.com/OmkarPathak/django-notekeeper.git
 ```bash
 cd django-notekeeper
 pip install -r requirements.txt
+```
+
+- Create a file names `.env` in the folder where your `settings.py` file is present. Enter following information in your .env file
+
+```
+SECRET_KEY=<your_secret_key>
 ```
 
 - Run django migrations
