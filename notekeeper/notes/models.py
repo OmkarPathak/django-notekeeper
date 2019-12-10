@@ -44,9 +44,11 @@ class Note(models.Model):
             markdown.markdown(
                 self.note_content,
                 extensions=['codehilite', 'fenced_code'],
-                extension_configs={
-                    'linenums': True
-                }
+                # extension_configs={
+                #     'codehilite':{
+                #         'linenums': True
+                #     }
+                # }
             )
         )
 
