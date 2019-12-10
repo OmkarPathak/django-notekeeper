@@ -6,10 +6,12 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.core.signing import Signer
 from django.utils.html import mark_safe
-from markdown import markdown
+import markdown
 import uuid
 from django.urls import reverse
 from unidecode import unidecode
+import markdown.extensions.fenced_code
+import markdown.extensions.codehilite
 
 
 def generate_unique_slug(_class, field):
@@ -38,7 +40,15 @@ class Note(models.Model):
     signer = Signer(salt='notes.Note')
 
     def get_message_as_markdown(self):
-        return mark_safe(markdown(self.note_content, safe_mode='escape'))
+        return mark_safe(
+            markdown.markdown(
+                self.note_content,
+                extensions=['codehilite', 'fenced_code'],
+                extension_configs={
+                    'linenums': True
+                }
+            )
+        )
 
     def get_signed_hash(self):
         signed_pk = self.signer.sign(self.pk)
