@@ -15,3 +15,4 @@ webencodings==0.5.1
 xhtml2pdf==0.2.3
 Markdown==3.1.1
 Unidecode==1.1.1
+markdown-checklist==0.4.1

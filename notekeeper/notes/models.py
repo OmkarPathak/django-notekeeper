@@ -43,7 +43,7 @@ class Note(models.Model):
         return mark_safe(
             markdown.markdown(
                 self.note_content,
-                extensions=['codehilite', 'fenced_code'],
+                extensions=['codehilite', 'fenced_code', 'markdown_checklist.extension'],
                 # extension_configs={
                 #     'codehilite':{
                 #         'linenums': True
