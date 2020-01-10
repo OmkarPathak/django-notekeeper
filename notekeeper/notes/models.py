@@ -12,6 +12,8 @@ from django.urls import reverse
 from unidecode import unidecode
 import markdown.extensions.fenced_code
 import markdown.extensions.codehilite
+import markdown.extensions.tables
+import markdown.extensions.toc
 
 
 def generate_unique_slug(_class, field):
@@ -43,12 +45,13 @@ class Note(models.Model):
         return mark_safe(
             markdown.markdown(
                 self.note_content,
-                extensions=['codehilite', 'fenced_code'],
+                extensions=['codehilite', 'fenced_code', 'tables', 'toc'],
                 # extension_configs={
                 #     'codehilite':{
                 #         'linenums': True
                 #     }
                 # }
+                output_format="html5"
             )
         )
 

@@ -119,19 +119,29 @@
       });
 
       $(document).ready(function() {
+        //tables
+        $('table').addClass('table table-striped table-bordered');
+        $('thead').addClass('thead-dark');
+
+        // loader
         $('.loader').hide();
+
+        // Markdown Editor
         var easyMDE = new EasyMDE({
             autofocus: true,
             autorefresh: true,
             spellChecker: false,
             minHeight: '180px'
         });
+
+        // datatable
         $('#all_notes').DataTable({
           order: [],
           responsive: true,
           // "lengthChange": false
         });
 
+        // sidebar
         $('#offcanvas').click(function() {
           $('.row-offcanvas').toggleClass('active');
         });
