@@ -10,6 +10,7 @@ A pretty easy django notes app. Have a note save it!
 - Easily share
 - Download note as PDF
 - Beautiful yet simple UI
+- Encrypted Data so that no one can phish it! ([using django-cryptography](https://github.com/georgemarshall/django-cryptography))
 
 # Installation
 
