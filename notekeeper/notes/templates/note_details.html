@@ -9,12 +9,12 @@
         <div class="col-lg-12 col-md-12">
             {% if note_detail %}
                 <div class="row">
-                    <h3 class="col-10" style="width: 100%; word-wrap: break-word;">
+                    <h3 class="col-9" style="width: 100%; word-wrap: break-word;">
                         <p class="text-wrap">
                             {{ note_detail.note_title }}
                         </p>
                     </h3>
-                    <span class="col-2">
+                    <span class="col-3">
                         <div class="float-right d-none d-md-block d-lg-block">
                             <a class="open-modal" data-url="{% url 'note_details_edit' note_detail.id %}" style="text-decoration: none; color: white" data-toggle="tooltip" title="Edit Note">    
                                 <span class="btn btn-primary" style="border-radius: 0;"><i class="far fa-edit"> </i></span>
