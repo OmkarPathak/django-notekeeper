@@ -1,0 +1,96 @@
+{% extends 'registration_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Notekeeper {% endblock %}
+<!-- {% load humanize %} -->
+{% block content %}
+<div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px;">
+    <div class="row text-center">
+        <div class="col">
+            <h1>Features</h1>
+            <hr style="width: 100px; border: 0.5px solid; margin-bottom: 50px;">
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-6 col-md-3 col-lg-3">
+            <i class="fas fa-sticky-note" style="font-size: 50px; margin-bottom: 5%;"></i>
+            <h4>Save</h4>
+            <p>
+                Save notes.. And thats all we want. Keeping it simple, notekeeper has all the tools (only necessary one's 😉) you need at one place
+            </p>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3">
+            <i class="fas fa-lock" style="font-size: 50px; margin-bottom: 5%;"></i>
+            <h4>Encrypted</h4>
+            <p>
+                We take security very seriously. All your notes are encrypted
+            </p>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3">
+            <i class="fas fa-share-square" style="font-size: 50px; margin-bottom: 5%;"></i>
+            <h4>Share</h4>
+            <p>
+                Hassel-free share your notes with each other without sharing login credentials
+            </p>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3">
+            <i class="fas fa-copy" style="font-size: 50px; margin-bottom: 5%;"></i>
+            <h4>Copy</h4>
+            <p>
+                Copying text from your notes is very easy. Just select the text and it will be copied to your clipboard
+            </p>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3">
+            <i class="fas fa-edit" style="font-size: 50px; margin-bottom: 5%;"></i>
+            <h4>Edit</h4>
+            <p>
+                Notekeeper supports markdown. Don't worry if you don't know markdown, we have added a physical toolbar too :)
+            </p>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3">
+            <i class="fab fa-searchengin" style="font-size: 50px; margin-bottom: 5%;"></i>
+            <h4>Search</h4>
+            <p>
+                Search notes quickly using your note titles or note tags
+            </p>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3">
+            <i class="fas fa-sort" style="font-size: 50px; margin-bottom: 5%;"></i>
+            <h4>Sort</h4>
+            <p>
+                Sort Notes based on datetime or note titles (ascending or descending)
+            </p>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3">
+            <i class="fas fa-thumbtack" style="font-size: 50px; margin-bottom: 5%;"></i>
+            <h4>Quick Access</h4>
+            <p>
+                Faster access to recently modified notes on your sidebar
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-light" style="margin-top: 20px;">
+    <div class="row text-center">
+        <div class="col" style="margin-top: 20px;">
+            <h1>Contribute</h1>
+            <hr style="width: 100px; border: 0.5px solid; margin-bottom: 50px;">
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col">
+            <p>
+                You can also contribute the development of notekeeper here: <a href="https://github.com/OmkarPathak/django-notekeeper" target="_blank">https://github.com/OmkarPathak/django-notekeeper</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

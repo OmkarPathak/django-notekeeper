@@ -76,31 +76,32 @@ def generate_pdf(request, slug):
 
 
 def home(request):
-    notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
-    all_notes = Note.objects.filter(user=request.user).order_by('-updated_at')
-    # paginator = Paginator(all_notes, 15)
+    if request.user.is_authenticated:
+        notes = Note.objects.filter(user=request.user).order_by('-updated_at')[:10]
+        all_notes = Note.objects.filter(user=request.user).order_by('-updated_at')
+        # paginator = Paginator(all_notes, 15)
 
-    if request.method == 'POST':
-        form = AddNoteForm(request.POST)
-        if form.is_valid():
-            form_data = form.save(commit=False)
-            form_data.user = request.user
-            form_data.save()
-            # Without this next line the tags won't be saved.
-            form.save_m2m()
+        if request.method == 'POST':
+            form = AddNoteForm(request.POST)
+            if form.is_valid():
+                form_data = form.save(commit=False)
+                form_data.user = request.user
+                form_data.save()
+                # Without this next line the tags won't be saved.
+                form.save_m2m()
+                form = AddNoteForm()
+                messages.success(request, 'Note added successfully!')
+                return redirect('notes')
+        else:
             form = AddNoteForm()
-            messages.success(request, 'Note added successfully!')
-            return redirect('notes')
+        context = {
+            'notes': notes,
+            'all_notes': all_notes,
+            'add_note_form': form,
+        }
+        return render(request, 'notes.html', context)
     else:
-        form = AddNoteForm()
-    # page = request.GET.get('page')
-    # all_notes = paginator.get_page(page)
-    context = {
-        'notes': notes,
-        'all_notes': all_notes,
-        'add_note_form': form,
-    }
-    return render(request, 'notes.html', context)
+        return render(request, 'index.html')
 
 
 def get_note_details(request, slug):
