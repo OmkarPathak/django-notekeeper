@@ -49,6 +49,10 @@ python manage.py runserver
 
 ![working](results/working.gif)
 
+# Encryption of all your note contents
+
+![Imgur](https://i.imgur.com/aADlcho.png)
+
 # Donation
 
 If you have found my softwares to be of any use to you, do consider helping me pay my internet bills. This would encourage me to create many such softwares :)
