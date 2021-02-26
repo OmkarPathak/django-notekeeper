@@ -98,6 +98,7 @@ def home(request):
             'notes': notes,
             'all_notes': all_notes,
             'add_note_form': form,
+            'script_name': request.META['SCRIPT_NAME'],
         }
         return render(request, 'notes.html', context)
     else:

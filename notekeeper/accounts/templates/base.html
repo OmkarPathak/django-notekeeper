@@ -156,7 +156,7 @@
           minLength: 2,
           select: function (value, data) {
             // console.log();
-            window.location.replace("/notes/" + data['item']['slug'] + "/");
+            window.location.replace("{{script_name}}/notes/" + data['item']['slug'] + "/");
           }
         });
       });
