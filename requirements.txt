@@ -1,4 +1,4 @@
-Django==2.2.13
+Django==2.2.20
 django-crispy-forms==1.8.0
 django-summernote==0.8.11.4
 django-taggit==1.1.0
