@@ -1,0 +1,68 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <Languages>
+        <language minSize="141" name="Python" />
+      </Languages>
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="43">
+            <item index="0" class="java.lang.String" itemvalue="ubuntu-drivers-common" />
+            <item index="1" class="java.lang.String" itemvalue="defer" />
+            <item index="2" class="java.lang.String" itemvalue="Brlapi" />
+            <item index="3" class="java.lang.String" itemvalue="xkit" />
+            <item index="4" class="java.lang.String" itemvalue="duplicity" />
+            <item index="5" class="java.lang.String" itemvalue="ufw" />
+            <item index="6" class="java.lang.String" itemvalue="pycups" />
+            <item index="7" class="java.lang.String" itemvalue="pycairo" />
+            <item index="8" class="java.lang.String" itemvalue="apturl" />
+            <item index="9" class="java.lang.String" itemvalue="python-apt" />
+            <item index="10" class="java.lang.String" itemvalue="PyGObject" />
+            <item index="11" class="java.lang.String" itemvalue="ubuntu-advantage-tools" />
+            <item index="12" class="java.lang.String" itemvalue="python-debian" />
+            <item index="13" class="java.lang.String" itemvalue="distro-info" />
+            <item index="14" class="java.lang.String" itemvalue="cupshelpers" />
+            <item index="15" class="java.lang.String" itemvalue="systemd-python" />
+            <item index="16" class="java.lang.String" itemvalue="dbus-python" />
+            <item index="17" class="java.lang.String" itemvalue="louis" />
+            <item index="18" class="java.lang.String" itemvalue="usb-creator" />
+            <item index="19" class="java.lang.String" itemvalue="command-not-found" />
+            <item index="20" class="java.lang.String" itemvalue="language-selector" />
+            <item index="21" class="java.lang.String" itemvalue="unattended-upgrades" />
+            <item index="22" class="java.lang.String" itemvalue="qrcode" />
+            <item index="23" class="java.lang.String" itemvalue="cryptography" />
+            <item index="24" class="java.lang.String" itemvalue="ipython" />
+            <item index="25" class="java.lang.String" itemvalue="pytest-xdist" />
+            <item index="26" class="java.lang.String" itemvalue="executing" />
+            <item index="27" class="java.lang.String" itemvalue="json2xml" />
+            <item index="28" class="java.lang.String" itemvalue="django-filter" />
+            <item index="29" class="java.lang.String" itemvalue="python-decouple" />
+            <item index="30" class="java.lang.String" itemvalue="distlib" />
+            <item index="31" class="java.lang.String" itemvalue="pytz" />
+            <item index="32" class="java.lang.String" itemvalue="django-cors-headers" />
+            <item index="33" class="java.lang.String" itemvalue="openpyxl" />
+            <item index="34" class="java.lang.String" itemvalue="notebook" />
+            <item index="35" class="java.lang.String" itemvalue="django-auto-prefetching" />
+            <item index="36" class="java.lang.String" itemvalue="autopep8" />
+            <item index="37" class="java.lang.String" itemvalue="phonenumbers" />
+            <item index="38" class="java.lang.String" itemvalue="django" />
+            <item index="39" class="java.lang.String" itemvalue="lxml" />
+            <item index="40" class="java.lang.String" itemvalue="tomli" />
+            <item index="41" class="java.lang.String" itemvalue="pycparser" />
+            <item index="42" class="java.lang.String" itemvalue="django-extensions" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E501" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

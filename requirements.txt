@@ -12,7 +12,7 @@ reportlab==3.5.32
 six==1.13.0
 sqlparse==0.3.0
 webencodings==0.5.1
-xhtml2pdf==0.2.3
+xhtml2pdf==0.2.5
 Markdown==3.1.1
 Unidecode==1.1.1
 markdown-checklist==0.4.1
